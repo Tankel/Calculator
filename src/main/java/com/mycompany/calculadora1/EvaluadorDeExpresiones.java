@@ -30,46 +30,45 @@ public class EvaluadorDeExpresiones {
         String num = "";
         char c;
         boolean numNegativo = false;
-        for (int i = 0; i < s.length(); i++) {
+        for(int i=0; i<s.length(); i++) {
             c = s.charAt(i);
-            if (Character.isDigit(c) || c == '.') {
+            if(Character.isDigit(c) || c == '.') {
                 num += c;
-                while (i + 1 < s.length() && (Character.isDigit(s.charAt(i + 1)) || s.charAt(i + 1) == '.')) {
+                while(i+1 < s.length() && (Character.isDigit(s.charAt(i+1)) || s.charAt(i+1) == '.')) {
                     i++;
                     c = s.charAt(i);
                     num += c;
-                    if (i + 1 >= s.length())
+                    if(i + 1 >= s.length())
                         break;
                 }
-                if (numNegativo) {
+                if(numNegativo) {
                     num = "-" + num;
                     numNegativo = false;
                 }
                 listai.insertar(num);
                 num = "";
-            } else if (c == '(') {
+            } else if(c == '(') {
                 listac.insertar(c);
                 numNegativo = false;
-            } else if (c == ')') {
-                if (listai.cimav() >= 1)
+            } else if(c == ')') {
+                if(listai.cimav()>=1)
                     operacion();
-                if ((char) listac.cimaPila() == '(')
+                if((char)listac.cimaPila() == '(')
                     listac.quitar();
-                else if (listai.cimav() >= 1)
+                else if(listai.cimav()>=1)
                     operacion();
                 numNegativo = false;
-            } else if (c == '-') { // número negativo
-                if (i == 0 || Character.isDigit(s.charAt(i - 1))) { // es número negativo
+            } else if(c == '~') {
+                if (i+1 < s.length() && Character.isDigit(s.charAt(i+1))) {
                     numNegativo = true;
-                } else { // es operador de resta
-                    listac.insertar(c);
-                    numNegativo = false;
+                } else {
+                    listac.insertar('-');
                 }
-            } else if (Character.isDigit(c)) {
-                if (listac.pilaVacia()) {
-                    listac.insertar(c);
-                    numNegativo = false;
-                } else if (jerarquia.get(listac.cimaPila()) < jerarquia.get(c)) {
+            } else if(listac.pilaVacia()) {
+                listac.insertar(c);
+                numNegativo = false;
+            } else if(!listac.pilaVacia()) {
+                if(jerarquia.get(listac.cimaPila()) < jerarquia.get(c)) {
                     listac.insertar(c);
                     numNegativo = false;
                 } else {
