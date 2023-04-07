@@ -10,7 +10,7 @@ This is a basic calculator made with the implementation of an expression evaluat
 ## Usage
 To use the calculator, simply download the Calculadora1-1.0-SNAPSHOT.jar in the main directory and run it.
 
-## Implementation Details
+## Implementation details
 The calculator works by using two stacks, one for the operators and one for the operands, to evaluate the expression. A HashMap is used to assign a hierarchy to each operator, allowing the calculator to properly follow the order of operations.
 
 ## Screenshots
